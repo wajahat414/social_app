@@ -60,33 +60,33 @@ class _PostState extends State<Post> {
                   widget.subtitle,
                   style: Theme.of(context).textTheme.caption,
                 ),
-                trailing: const Icon(Icons.kebab_dining_outlined),
+                trailing: Icon(
+                  Icons.more_horiz,
+                  color: Colors.black.withOpacity(0.6),
+                ),
               ),
             ),
           ),
           //Image Placement
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
-            child: Expanded(
-              flex: 7,
-              child: AspectRatio(
-                aspectRatio: 4 / 5,
+          Expanded(
+            flex: 7,
+            child: AspectRatio(
+              aspectRatio: 0.72,
+              child: Container(
                 child: Container(
-                  child: Container(
-                    padding: EdgeInsets.all(0),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Image(
-                        image: NetworkImage(
-                          widget.imageAddress,
-                        ),
-                        fit: BoxFit.cover,
-                        width: double.infinity,
+                  padding: EdgeInsets.all(0),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image(
+                      image: NetworkImage(
+                        widget.imageAddress,
                       ),
+                      fit: BoxFit.cover,
+                      width: double.infinity,
                     ),
                   ),
                 ),
@@ -95,6 +95,7 @@ class _PostState extends State<Post> {
           )
           //Post Buttons
           ,
+
           PostButtons(),
         ],
       ),
@@ -109,18 +110,40 @@ class _PostState extends State<Post> {
 
   PairButtonCounter() {
     return Flexible(
-      child: ListTile(
-        leading: IconButton(
-          icon: Icon(isLiked
-              ? Icons.favorite_rounded
-              : Icons.favorite_border_outlined),
-          onPressed: (() {
-            isLiked = !isLiked;
-          }),
+        child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        Row(
+          children: [
+            IconButton(
+              icon: Icon(
+                isLiked
+                    ? Icons.favorite_rounded
+                    : Icons.favorite_border_outlined,
+                color: isLiked ? Colors.red : Colors.grey,
+              ),
+              onPressed: (() {
+                setState(() {
+                  isLiked = !isLiked;
+                  isLiked ? ++likes : 0;
+                });
+              }),
+            ),
+            Text(
+              "$likes",
+              style: Theme.of(context).textTheme.caption,
+            ),
+          ],
         ),
-        trailing: Icon(Icons.comment_sharp),
-        title: Icon(Icons.share),
-      ),
-    );
+        Icon(
+          Icons.comment_sharp,
+          color: Colors.grey,
+        ),
+        Icon(
+          Icons.share,
+          color: Colors.grey,
+        )
+      ],
+    ));
   }
 }

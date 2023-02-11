@@ -39,3 +39,34 @@ class _TestState extends State<Test> {
     );
   }
 }
+
+void main() => runApp(MaterialApp(
+    builder: (context, child) {
+      return Directionality(textDirection: TextDirection.ltr, child: child!);
+    },
+    title: 'GNav',
+    theme: ThemeData(
+      primaryColor: Colors.grey[800],
+    ),
+    home: Example()));
+
+class Example extends StatefulWidget {
+  @override
+  _ExampleState createState() => _ExampleState();
+}
+
+class _ExampleState extends State<Example> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        elevation: 20,
+        title: const Text('GoogleNavBar'),
+      ),
+      body: Center(
+          // child: _widgetOptions.elementAt(_selectedIndex),
+          ),
+    );
+  }
+}
